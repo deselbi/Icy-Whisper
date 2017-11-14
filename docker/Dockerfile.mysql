@@ -1,0 +1,8 @@
+FROM mysql:5.7
+
+ENV MYSQL_DATABASE homestead
+ENV MYSQL_USER homestead
+ENV MYSQL_PASSWORD secret
+ENV MYSQL_ROOT_PASSWORD secretsecret
+
+CMD ["mysqld"]

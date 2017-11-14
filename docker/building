@@ -1,0 +1,21 @@
+## build data container
+docker build -t icy_whisper/data:0.1 .
+## nginx image
+docker build -t icy_whisper/nginx:0.1 . -f Dockerfile.nginx
+## mysql image
+docker build -t icy_whisper/mysql:0.1 . -f Dockerfile.mysql
+## php in fpm directory
+cd fpm
+docker build -t icy_whisper/php:0.1 .
+cd -
+
+
+## running containers
+# 1. data container
+docker run -d --name code icy_whisper/data:0.1
+# 2. php container
+docker run -d --name php --volumes-from code icy_whisper/php:0.1
+# 3. mysql container
+docker run -d --name mysql icy_whisper/mysql:0.1
+# web container
+docker run -d --name web --link php --link mysql --volumes-from code icy_whisper/nginx:0.1

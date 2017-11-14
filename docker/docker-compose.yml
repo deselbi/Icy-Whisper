@@ -1,0 +1,27 @@
+# vim:set ts=2 sw=2 ai expandtab:
+version: '2'
+services:
+  workspace:
+    build: .
+  php:
+    build:
+      context: ./fpm
+    volumes_from:
+      - workspace
+  web:
+    image: nginx:alpine
+    depends_on:
+      - php
+    links:
+      - php
+      - mysql
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - ./php.conf.inc:/etc/nginx/conf.d/php.conf.inc
+      - ./fastcgi.conf:/etc/nginx/fastcgi.conf
+    volumes_from:
+      - workspace
+  mysql:
+    image: mysql:5.7
+    env_file:
+      - ./mysql.env
