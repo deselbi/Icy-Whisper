@@ -5,9 +5,7 @@ docker build -t icy_whisper/nginx:0.1 . -f Dockerfile.nginx
 ## mysql image
 docker build -t icy_whisper/mysql:0.1 . -f Dockerfile.mysql
 ## php in fpm directory
-cd fpm
-docker build -t icy_whisper/php:0.1 .
-cd -
+docker build -t icy_whisper/php:0.1 -f Dockerfile.php .
 
 
 ## running containers
