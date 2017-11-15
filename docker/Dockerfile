@@ -22,4 +22,4 @@ RUN cd /icy-whisper && /usr/bin/composer install && php artisan key:generate
 
 FROM busybox
 COPY --from=phpbuilder /icy-whisper /icy-whisper
-VOLUME /icy-whisper
+VOLUME /home/ivan/project /icy-whisper
